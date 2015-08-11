@@ -1,3 +1,7 @@
+
+###################################################
+#WEEK 1
+###################################################
 ###Lesson 1 
 setwd("h:/Coursera/R_Programming") 
 
@@ -176,4 +180,92 @@ x * y
 x / y
 
 #Matrix stuff is different
+
+###################################################
+#WEEK 2
+###################################################
+
+#loop
+for(i in 1:10){
+  print(i)
+}
+
+x <- c("a","b","c")
+
+for(i in 1:4){
+  print(x[i])
+}
+
+#seek_along creates an interger sequence 1:4 of the length of x
+for(i in seq_along(x)){
+  print(x[i])
+}
+
+#Prints out the index 
+for(letter in x){
+  print(letter)
+}
+
+#No braces needed if on a single line
+for(letter in x) print(letter)
+
+#Nested loops
+x<- matrix(1:6,2,3)
+
+#Looping through matrix
+for(i in seq_len(nrow(x))){
+  for (j in seq_len(ncol(x))){
+    print(x[i,j])
+  }
+}
+
+#While loops
+count <- 0
+while(count < 10){
+  print(count)
+  count <- count +1
+}
+
+z <- 5
+while(z >= 1 && z<= 10){
+  print(z)
+  coin <- rbinom(1,1,.5)
+  
+  if(coin ==1){
+    z <- z +1
+  }else{
+    z <- z -1
+  }
+  
+}
+
+###Repeat, Next, Break###
+
+#Repeat
+x0 <- 1
+to1 <- 1e-8
+
+repeat{
+  x1 <- computeEstimate()
+  if(abs (x1 - x0) < tol){
+    break
+  }else{
+    x0 <- x1
+  }
+}
+
+#Next skips an iteration
+for(i in 1:100){
+  if(i<= 20 || i>= 40){
+    next()
+  }
+  print(i)
+}
+
+#Break ends the loop
+for(i in 1:100){
+  print(i)
+  if(i==10) break
+  
+}
 
