@@ -27,4 +27,3 @@ columnmean <- function(y,removeNA = TRUE){
 }
 
 
-
