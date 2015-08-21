@@ -269,3 +269,110 @@ for(i in 1:100){
   
 }
 
+###################################################
+#WEEK 3
+###################################################
+
+#lapply - loop over a list and evaluate a function
+#sapply
+#apply
+#tapply
+#mapply
+#split splits objects into subpieces
+
+#lapply (always returns list)
+x<- list(a=1:5,b=rnorm(10))
+x<-lapply(x,mean)
+
+x<- 1:4
+y <- lapply(x,runif)
+
+x <- 1:4
+y <- lapply(x,runif,min=0,max=10)
+y
+
+#Anonymous Function written in lapply
+x <- list(a=matrix(1:4,2,2),b=matrix(1:6,3,2))
+y <- lapply(x, function(elt) elt[,2])
+y
+
+#sapply (simplifies result)
+x<- list(a=1:4,b=rnorm(10), c=rnorm(20,1),d=rnorm(100,5))
+y<-sapply(x,mean)
+y
+
+#Apply
+x <- matrix(rnorm(200),20,10)
+y <- apply(x,2,mean)
+z <- apply(x,1,sum)
+
+#To calculate row and column sums and means use
+#rowSums, rowMeans, colSums, colMeans
+
+#Calcualte 25th and 75th percentiles fo a row
+x<- matrix(rnorm(200),20,10)
+y <- apply(x,1,quantile,c(0.25,0.75))
+y
+
+#Collapse a 3 dimensional array into 2 and figue out the mean
+a <- array(rnorm(2 * 2 * 10),c(2,2,10))
+b <- apply(a,c(1,2),mean)
+b
+
+rowMeans(a,dims=1)
+
+###MAPPLY###
+#multiple list 
+list(rep(1,4),rep(2,3),rep(3,2),rep(4,1))
+mapply(rep,1:4,4:1)
+
+noise <- function(n,mean,sd){
+    rnorm(n,mean,sd)
+}
+
+noise(5,1,2)
+noise(1:5,1:5,2)
+
+mapply(noise,1:5,1:5,2)
+
+###tapply###
+#apply function over subset of vectors
+x <- c(rnorm(10),runif(10),rnorm(10,1))
+f <- gl(3,10)
+tapply(x,f,mean)
+tapply(x,f,mean,simplify = FALSE)
+tapply(x,f,range)
+
+###split###
+#always returns list back
+x <- c(rnorm(10),runif(10),rnorm(10,1))
+f <- gl(3,10)
+split(x,f)
+
+lapply(split(x,f),mean) #tapply does the same thing
+
+#splitting a data frame
+library(datasets)
+head(airquality)
+s <- split(airquality,airquality$Month)
+lapply(s,function(x) colMeans(x[,c("Ozone","Solar.R","Wind")]))
+
+sapply(s,function(x) colMeans(x[,c("Ozone","Solar.R","Wind")]))
+
+sapply(s,function(x) colMeans(x[,c("Ozone","Solar.R","Wind")],na.rm = TRUE))
+
+x <- rnorm(10)
+f1 <- gl(2,5)
+f2 <- gl(5,2)
+
+interaction(f1,f2)
+
+str(split(x,list(f1,f2)))
+testSplit <- split(x,list(f1,f2),drop = TRUE)
+testSplit$'1.1'
+
+###Debugging###
+mean(x)
+#traceback() gets you 
+
+
